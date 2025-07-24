@@ -49,6 +49,14 @@ const Plugin: FC<Props> = (props) => {
             }
             actions={
               <Button
+                onClick={() => {
+                  dashboard.navigate(
+                    {
+                      pageId: "0fe29310-c5f2-4aa1-9543-63a1c14b706f",
+                      relativeUrl: "?productId=" + mostExpensiveProduct._id,
+                    },
+                  );
+                }}
               >
                 Discount Product
               </Button>

@@ -1,5 +1,8 @@
 {
   "$schema": "https://dev.wix.com/wix-cli/schemas/dashboard-page.json",
   "id": "0fe29310-c5f2-4aa1-9543-63a1c14b706f",
-  "title": "Product Discounter"
+  "title": "Product Discounter",
+  "sidebar": {
+    "disabled": true
+  }
 }
