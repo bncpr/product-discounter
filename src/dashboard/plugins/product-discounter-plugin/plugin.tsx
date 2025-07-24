@@ -1,63 +1,28 @@
-import React, { type FC, useEffect, useState } from "react";
+import React, { type FC } from "react";
 import type { plugins } from "@wix/stores/dashboard";
-import { products } from "@wix/stores";
+import { dashboard } from "@wix/dashboard";
 import {
-  WixDesignSystemProvider,
-  Card,
-  Text,
-  TextButton,
-  Loader,
-  Layout,
-  Cell,
-  Image,
-  MarketingLayout,
   Button,
+  Card,
+  Image,
+  Loader,
+  MarketingLayout,
+  Text,
+  WixDesignSystemProvider,
 } from "@wix/design-system";
+import { useMostExpensiveProduct } from "./useMostExpensiveProduct";
+
 import "@wix/design-system/styles.global.css";
 
 type Props = plugins.Products.ProductsBannerParams;
 
 const Plugin: FC<Props> = (props) => {
-  const [mostExpensiveProduct, setMostExpensiveProduct] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchMostExpensiveProduct() {
-      setLoading(true);
-      try {
-        let allItems: any[] = [];
-
-        let results = await products.queryProducts().find();
-        allItems.push(...results.items);
-
-        while (results.hasNext()) {
-          results = await results.next();
-          allItems.push(...results.items);
-        }
-
-        if (allItems.length > 0) {
-          setMostExpensiveProduct(
-            allItems.reduce((prev, current) => {
-              return prev.priceData.price > current.priceData.price
-                ? prev
-                : current;
-            })
-          );
-        } else {
-          setMostExpensiveProduct(null);
-        }
-      } catch (error) {
-        setMostExpensiveProduct(null);
-      }
-      setLoading(false);
-    }
-    fetchMostExpensiveProduct();
-  }, []);
+  const { mostExpensiveProduct } = useMostExpensiveProduct();
 
   return (
     <WixDesignSystemProvider features={{ newColorsBranding: true }}>
       <Card>
-        {loading && (
+        {!mostExpensiveProduct && (
           <Card.Content>
             <Loader />
           </Card.Content>
