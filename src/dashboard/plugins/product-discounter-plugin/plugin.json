@@ -1,0 +1,7 @@
+{
+  "$schema": "https://dev.wix.com/wix-cli/schemas/dashboard-plugin.json",
+  "id": "95dffac6-9c9a-49f9-b124-5e67753f35d6",
+  "title": "Product Discounter Plugin",
+  "extends": "3ca518a6-8ae7-45aa-8cb9-afb3da945081",
+  "height": 300
+}
